@@ -59,7 +59,7 @@ SMART-TODO-MANAGER/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/smart-todo-manager.git
+git clone https://github.com/vaish4596/smart-todo-manager.git
 cd smart-todo-manager
 ```
 
