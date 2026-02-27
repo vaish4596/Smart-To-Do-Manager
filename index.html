@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Smart To-Do Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen p-4">
+    <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+      <h1 class="text-3xl font-bold mb-4 text-center">Smart To-Do Manager</h1>
+
+      <!-- Add Task -->
+      <div class="grid md:grid-cols-4 gap-2 mb-4">
+        <input
+          id="title"
+          type="text"
+          placeholder="Task title"
+          class="border p-2 rounded"
+        />
+        <input
+          id="category"
+          type="text"
+          placeholder="Category (Work/Personal)"
+          class="border p-2 rounded"
+        />
+        <input id="dueDate" type="date" class="border p-2 rounded" />
+        <button onclick="addTask()" class="bg-blue-500 text-white rounded p-2">
+          Add
+        </button>
+      </div>
+
+      <!-- Search & Filter -->
+      <div class="grid md:grid-cols-3 gap-2 mb-4">
+        <input
+          id="search"
+          oninput="renderTasks()"
+          placeholder="Search..."
+          class="border p-2 rounded"
+        />
+        <select
+          id="statusFilter"
+          onchange="renderTasks()"
+          class="border p-2 rounded"
+        >
+          <option value="">All Status</option>
+          <option value="completed">Completed</option>
+          <option value="pending">Pending</option>
+        </select>
+        <input
+          id="categoryFilter"
+          oninput="renderTasks()"
+          placeholder="Filter by Category"
+          class="border p-2 rounded"
+        />
+      </div>
+
+      <!-- Task List -->
+      <div id="taskList" class="space-y-2"></div>
+    </div>
+
+    <script>
+      const API = "http://localhost:5000/tasks";
+      let tasks = [];
+
+      async function fetchTasks() {
+        const res = await fetch(API);
+        tasks = await res.json();
+        renderTasks();
+      }
+
+      async function addTask() {
+        const title = document.getElementById("title").value;
+        const category = document.getElementById("category").value;
+        const dueDate = document.getElementById("dueDate").value;
+
+        if (!title) return alert("Task title required");
+
+        await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, category, dueDate }),
+        });
+
+        document.getElementById("title").value = "";
+        fetchTasks();
+      }
+
+      async function toggleTask(id) {
+        await fetch(`${API}/${id}`, { method: "PUT" });
+        fetchTasks();
+      }
+
+      async function deleteTask(id) {
+        await fetch(`${API}/${id}`, { method: "DELETE" });
+        fetchTasks();
+      }
+
+      function renderTasks() {
+        const search = document.getElementById("search").value.toLowerCase();
+        const statusFilter = document.getElementById("statusFilter").value;
+        const categoryFilter = document
+          .getElementById("categoryFilter")
+          .value.toLowerCase();
+
+        const filtered = tasks.filter((task) => {
+          const matchesSearch = task.title.toLowerCase().includes(search);
+          const matchesCategory = task.category
+            ?.toLowerCase()
+            .includes(categoryFilter);
+          const matchesStatus =
+            statusFilter === "" ||
+            (statusFilter === "completed" && task.completed) ||
+            (statusFilter === "pending" && !task.completed);
+
+          return matchesSearch && matchesCategory && matchesStatus;
+        });
+
+        const taskList = document.getElementById("taskList");
+        taskList.innerHTML = "";
+
+        filtered.forEach((task) => {
+          taskList.innerHTML += `
+      <div class="flex justify-between items-center p-3 border rounded">
+        <div>
+          <p class="${task.completed ? "line-through text-gray-500" : ""}">
+            ${task.title}
+          </p>
+          <small class="text-sm text-gray-500">
+            ${task.category || "No Category"} | Due: ${task.dueDate || "N/A"}
+          </small>
+        </div>
+        <div class="space-x-2">
+          <button onclick="toggleTask(${task.id})"
+            class="px-3 py-1 bg-green-500 text-white rounded">
+            ✓
+          </button>
+          <button onclick="deleteTask(${task.id})"
+            class="px-3 py-1 bg-red-500 text-white rounded">
+            🗑
+          </button>
+        </div>
+      </div>
+    `;
+        });
+      }
+
+      fetchTasks();
+    </script>
+  </body>
+</html>
