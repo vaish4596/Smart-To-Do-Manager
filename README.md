@@ -1,24 +1,35 @@
-# 🧠 Smart To-Do Manager
+# Smart To-Do Manager
 
-A full-stack task management web application that helps users organize, track, and manage daily tasks efficiently. This project is built using **HTML, Tailwind CSS, Vanilla JavaScript for the frontend** and **Node.js with Express for the backend**, with a **JSON file used as a lightweight database for persistent storage**.
+A Full Stack Task Management Application built using:
 
----
+- HTML
+- Tailwind CSS
+- Vanilla JavaScript
+- Node.js
+- Express
+- JSON file database
 
-## 🚀 Features
+## Features
 
-* ➕ Add new tasks with category and due date
-* ✅ Mark tasks as complete or incomplete
-* 🗑️ Delete tasks
-* 🔍 Search tasks instantly
-* 📂 Filter tasks by status and category
-* 📅 Due date support
-* 💾 Persistent data storage using JSON file
-* 📱 Fully responsive design
+- Add Task
+- Delete Task
+- Toggle Status
+- Search Tasks
+- Filter by Status
+- Filter by Category
+- Due Date Support
+- Mobile Responsive
+- Persistent Data (JSON file)
 
----
+## How to Run
 
-## 🛠️ Tech Stack
+1. Go to backend folder
+2. Run:
+   npm install
+   npm start
+3. Open index.html in browser
 
+<<<<<<< HEAD
 **Frontend**
 
 * HTML5
@@ -74,53 +85,7 @@ npm start
 Server will run at:
 
 ```bash
+=======
+Server runs on:
+>>>>>>> 02d7e00 (added backend files)
 http://localhost:5000
-```
-
-### 3️⃣ Run the frontend
-
-Open the following file in your browser:
-
-```bash
-index.html
-```
-
----
-
-## 🔄 How It Works
-
-* The frontend sends HTTP requests to the Express server
-* The backend handles CRUD operations
-* Task data is stored in `db.json`
-* Changes are saved permanently
-
----
-
-## 🎯 Learning Outcomes
-
-This project demonstrates:
-
-* REST API development
-* CRUD operations
-* Full stack integration
-* Client-server architecture
-* JSON-based data persistence
-* Responsive frontend design
-
----
-
-## 🔮 Future Improvements
-
-* User authentication (Login/Signup)
-* Database integration (MongoDB / MySQL)
-* Task reminders and notifications
-* Drag and drop task management
-* Deployment (Render / Railway / Netlify)
-
----
-
-## 👩‍💻 Author
-
-**Vaishnavi Shetty**
-
-If you found this project useful, please give it a ⭐ on GitHub!
