@@ -1,13 +1,6 @@
 {
   "tasks": [
     {
-      "id": 1771937154803,
-      "title": "home work",
-      "category": "work",
-      "dueDate": "2004-11-02",
-      "completed": false
-    },
-    {
       "id": 1771937171780,
       "title": "test task",
       "category": "work",
@@ -20,6 +13,13 @@
       "category": "personal",
       "dueDate": "2025-10-06",
       "completed": false
+    },
+    {
+      "id": 1780076024404,
+      "title": "exam",
+      "category": "college",
+      "dueDate": "2026-05-30",
+      "completed": true
     }
   ]
 }
