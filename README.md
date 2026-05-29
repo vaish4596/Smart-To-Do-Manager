@@ -24,10 +24,18 @@ A Full Stack Task Management Application built using:
 ## How to Run
 
 1. Go to backend folder
-2. Run:
-   npm install
-   npm start
-3. Open index.html in browser
 
-Server runs on:
+2. Run:
+
+```bash
+npm install
+npm start
+```
+
+3. Open `index.html` in browser
+
+## Server Runs On
+
+```text
 http://localhost:5000
+```
